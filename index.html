@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mon Cherie Photobooth</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <section class="screen layout-screen is-active" id="layoutScreen">
+        <header class="brand-card">
+          <div class="poster-title" aria-label="Mon Cherie">MON CHERIE</div>
+          <div class="poster-script">mon cherie</div>
+        </header>
+
+        <div class="frame-copy">
+          <h1>Pick your frame</h1>
+          <p class="subtitle">choose your photobooth strip before the ticket prints</p>
+        </div>
+
+        <div class="layout-grid" id="layoutOptions">
+          <button class="layout-card" type="button" data-layout="duo">
+            <span class="layout-name">2 pics</span>
+            <span class="mini-frame mini-duo"><i></i><i></i></span>
+          </button>
+          <button class="layout-card" type="button" data-layout="trio">
+            <span class="layout-name">3 pics</span>
+            <span class="mini-frame mini-trio"><i></i><i></i><i></i></span>
+          </button>
+          <button class="layout-card" type="button" data-layout="quad">
+            <span class="layout-name">4 big</span>
+            <span class="mini-frame mini-quad"><i></i><i></i><i></i><i></i></span>
+          </button>
+          <button class="layout-card is-selected" type="button" data-layout="stack">
+            <span class="layout-name">4 stacked</span>
+            <span class="mini-frame mini-stack"><i></i><i></i><i></i><i></i></span>
+          </button>
+        </div>
+      </section>
+
+      <section class="screen receipt-screen" id="receiptScreen" aria-hidden="true">
+        <div class="receipt" id="receipt">
+          <div class="receipt-half receipt-top">
+            <p class="receipt-kicker">mon cherie ticket</p>
+            <h2 id="receiptTitle">4 stacked</h2>
+            <div class="receipt-lines">
+              <div class="receipt-line"><span>booth mode</span><strong>k-photo</strong></div>
+              <div class="receipt-line"><span>photos</span><strong id="receiptCount">4 poses</strong></div>
+              <div class="receipt-line"><span>extras</span><strong>stickers after</strong></div>
+            </div>
+          </div>
+          <div class="tear-line" aria-hidden="true"></div>
+          <div class="receipt-half receipt-bottom" id="receiptPull">
+            <span>grab here and rip</span>
+            <small>drag the lower half away</small>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen booth-screen" id="boothScreen" aria-hidden="true">
+        <header class="booth-top">
+          <div>
+            <p class="kicker">PHOTO MODE</p>
+            <h1>Mon Cherie</h1>
+          </div>
+          <button class="round-button" id="swapCamera" type="button" aria-label="Switch camera">↻</button>
+        </header>
+
+        <div class="viewfinder">
+          <video id="camera" autoplay playsinline muted></video>
+          <canvas id="snapshotCanvas" hidden></canvas>
+          <div class="camera-message" id="cameraMessage" hidden>
+            <strong>Camera blocked</strong>
+            <span>Allow camera access, then refresh.</span>
+          </div>
+          <div class="filter-wash" id="filterWash"></div>
+          <div class="countdown" id="countdown" aria-live="polite"></div>
+          <div class="pose-chip" id="poseChip">Pose 1 / 4</div>
+        </div>
+
+        <div class="booth-controls">
+          <div class="filter-panel">
+            <button class="is-active" data-filter="clean" type="button">Clean</button>
+            <button data-filter="cherub" type="button">Cherub</button>
+            <button data-filter="idol" type="button">Idol</button>
+            <button data-filter="bubble" type="button">Bubble</button>
+            <button data-filter="manga" type="button">Manga</button>
+            <button data-filter="y2k" type="button">Y2K</button>
+            <button data-filter="blush" type="button">Blush</button>
+            <button data-filter="noir" type="button">Noir</button>
+          </div>
+          <button class="primary-action" id="captureButton" type="button">Start</button>
+        </div>
+      </section>
+
+      <section class="screen decorate-screen" id="decorateScreen" aria-hidden="true">
+        <aside class="finish-tools">
+          <p class="kicker">DECORATE</p>
+          <h1>Sticker time</h1>
+
+          <div class="action-row">
+            <button class="secondary-action" id="retakeButton" type="button">Retake</button>
+            <button class="primary-action" id="downloadButton" type="button">Download</button>
+          </div>
+
+          <section class="tool-block">
+            <h2>Frame color</h2>
+            <div class="swatch-grid" id="frameOptions">
+              <button class="swatch is-active" data-frame="cherie" type="button" aria-label="Cherie frame"></button>
+              <button class="swatch" data-frame="cream" type="button" aria-label="Cream frame"></button>
+              <button class="swatch" data-frame="lilac" type="button" aria-label="Lilac frame"></button>
+              <button class="swatch" data-frame="butter" type="button" aria-label="Butter frame"></button>
+              <button class="swatch" data-frame="ink" type="button" aria-label="Ink frame"></button>
+            </div>
+          </section>
+
+          <section class="tool-block">
+            <h2>Stickers</h2>
+            <div class="sticker-grid" id="stickerOptions">
+              <button class="sticker is-active" data-sticker="creatures-a" type="button">set 1</button>
+              <button class="sticker" data-sticker="pastel-a" type="button">set 2</button>
+              <button class="sticker" data-sticker="creatures-b" type="button">set 1 mix</button>
+              <button class="sticker" data-sticker="pastel-b" type="button">set 2 mix</button>
+            </div>
+          </section>
+        </aside>
+
+        <div class="final-preview">
+          <canvas id="stripCanvas" width="720" height="2160" aria-label="Finished photobooth preview"></canvas>
+        </div>
+      </section>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
